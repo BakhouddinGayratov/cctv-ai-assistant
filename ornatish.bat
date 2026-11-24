@@ -28,6 +28,8 @@ if not exist ".env" (
 )
 
 echo [3/6] Kutubxonalar va modellar o'rnatilmoqda (bir necha daqiqa)...
+rem onnxruntime yangi Visual C++ kutubxonasini talab qiladi, eski bo'lsa server qulaydi
+winget install -e --id Microsoft.VCRedist.2015+.x64 --accept-package-agreements --accept-source-agreements >nul 2>&1
 python -m pip install --disable-pip-version-check -r requirements.txt || (echo Kutubxonalar o'rnatilmadi. & pause & exit /b 1)
 if not exist "models" mkdir models
 if not exist "models\w600k_r50.onnx" (
