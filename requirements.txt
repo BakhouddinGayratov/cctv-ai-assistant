@@ -1,20 +1,27 @@
-fastapi>=0.110.0
-uvicorn[standard]>=0.28.0
-groq>=0.11.0
-google-genai>=0.1.1
-opencv-python>=4.9.0.80
-onnxruntime==1.23.2  # 1.32 ba'zi kompyuterlarda yuklanishda qulaydi (access violation)
-numpy>=1.24
-pydantic>=2.6.0
-pydantic-settings>=2.2.0
-pillow>=10.2.0
-python-multipart>=0.0.9
-python-dotenv>=1.0.1
-sqlmodel>=0.0.16
-# Ixtiyoriy: ish stoli zonasida odam aniqlash (YOLOv8n)
-ultralytics>=8.1.0
-# 2–5 bosqichlar: rejalashtiruvchi, hisobotlar (Excel/PDF), ogohlantirish ovozi (server tomonida)
-apscheduler>=3.10,<4
-openpyxl>=3.1
-reportlab>=4.0
-edge-tts>=6.1
+# Versiyalar ishlab turgan kompyuterda sinalganiga mahkamlangan: yangi versiyalar (onnxruntime 1.32, sqlmodel)
+# boshqa kompyuterda server qulashiga yoki vaqt yozuvlari xatosiga olib keldi.
+fastapi==0.141.1
+starlette==1.6.0
+uvicorn[standard]==0.52.4
+pydantic==2.12.5
+pydantic-settings==2.15.0
+python-multipart==0.0.32
+python-dotenv==1.0.1
+sqlmodel==0.0.39
+SQLAlchemy==2.0.52
+httpx==0.28.1
+groq==1.7.0
+google-genai==2.18.1
+numpy==2.2.6
+opencv-python==5.0.0.93
+onnxruntime==1.23.2
+pillow==12.3.0
+# odam aniqlash (YOLOv8n)
+ultralytics==8.4.125
+torch==2.13.0
+torchvision==0.28.0
+# rejalashtiruvchi, hisobotlar (Excel/PDF), ogohlantirish ovozi
+APScheduler==3.10.4
+openpyxl==3.1.5
+reportlab==4.5.1
+edge-tts==7.3.1
