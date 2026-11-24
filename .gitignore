@@ -1,0 +1,13 @@
+# maxfiy kalitlar va parollar
+.env
+# xodimlar yuzlari, davomat bazasi (biometrik ma'lumot)
+data/
+clips/
+# modellar (ornatish.bat yuklab oladi, ArcFace GitHub chegarasidan katta)
+models/
+*.pt
+*.onnx
+__pycache__/
+*.pyc
+*.log
+frontend/node_modules/

@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------- tokens */
+@theme {
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* Semantik ranglar (yorug' mavzu — qorong'i mavzu .dark ichida) */
+  --color-bg: oklch(97.6% 0.006 265);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-2: oklch(96.4% 0.008 265);
+  --color-surface-3: oklch(93% 0.012 265);
+  --color-fg: oklch(20% 0.03 265);
+  --color-fg-muted: oklch(46% 0.025 265);
+  --color-fg-subtle: oklch(60% 0.02 265);
+  --color-line: oklch(20% 0.03 265 / 9%);
+  --color-line-strong: oklch(20% 0.03 265 / 16%);
+
+  --color-brand: oklch(56% 0.22 285);
+  --color-brand-fg: oklch(99% 0 0);
+  --color-brand-soft: oklch(56% 0.22 285 / 12%);
+  --color-accent: oklch(66% 0.13 215);
+  --color-accent-soft: oklch(66% 0.13 215 / 14%);
+
+  /* Holat ranglari (dataviz status palitrasi — o'zgarmas) */
+  --color-good: #0ca30c;
+  --color-warning: #fab219;
+  --color-serious: #ec835a;
+  --color-critical: #d03b3b;
+  --color-good-soft: color-mix(in oklab, #0ca30c 14%, transparent);
+  --color-warning-soft: color-mix(in oklab, #fab219 18%, transparent);
+  --color-critical-soft: color-mix(in oklab, #d03b3b 14%, transparent);
+
+  /* Grafik seriyalari (dataviz kategorik: 1=ko'k, 3=aqua) */
+  --color-series-1: #2a78d6;
+  --color-series-3: #1baf7a;
+  --color-grid: #e1e0d9;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  --shadow-card: 0 1px 0 0 oklch(100% 0 0 / 60%) inset, 0 1px 2px oklch(20% 0.03 265 / 6%), 0 8px 24px -12px oklch(20% 0.03 265 / 18%);
+  --shadow-pop: 0 24px 64px -16px oklch(20% 0.05 265 / 35%);
+  --shadow-glow: 0 0 0 1px oklch(56% 0.22 285 / 30%), 0 8px 32px -8px oklch(56% 0.22 285 / 45%);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-pulse-ring: pulse-ring 1.8s var(--ease-out-expo) infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-scan: scan 3.2s linear infinite;
+
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 currentColor; }
+    100% { box-shadow: 0 0 0 7px transparent; }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes scan {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+  }
+}
+
+.dark {
+  --color-bg: oklch(13.5% 0.022 268);
+  --color-surface: oklch(17.5% 0.026 268);
+  --color-surface-2: oklch(21% 0.03 268);
+  --color-surface-3: oklch(25.5% 0.034 268);
+  --color-fg: oklch(96.5% 0.008 268);
+  --color-fg-muted: oklch(74% 0.022 268);
+  --color-fg-subtle: oklch(58% 0.024 268);
+  --color-line: oklch(100% 0 0 / 7.5%);
+  --color-line-strong: oklch(100% 0 0 / 13%);
+
+  --color-brand: oklch(66% 0.2 285);
+  --color-brand-soft: oklch(66% 0.2 285 / 16%);
+  --color-accent: oklch(80% 0.13 212);
+  --color-accent-soft: oklch(80% 0.13 212 / 14%);
+
+  --color-series-1: #3987e5;
+  --color-series-3: #199e70;
+  --color-grid: #2c2c2a;
+
+  --shadow-card: 0 1px 0 0 oklch(100% 0 0 / 5%) inset, 0 12px 32px -16px oklch(0% 0 0 / 70%);
+  --shadow-pop: 0 32px 80px -20px oklch(0% 0 0 / 80%);
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html.dark { color-scheme: dark; }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    min-height: 100dvh;
+  }
+  * { border-color: var(--color-line); }
+  ::selection { background: var(--color-brand-soft); }
+  :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; border-radius: 6px; }
+  button, [role="button"] { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  input[type="time"]::-webkit-calendar-picker-indicator,
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: var(--picker-filter, none); }
+  .dark { --picker-filter: invert(0.8); }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-line-strong); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+}
+
+/* ------------------------------------------------------------- utilities */
+@utility glass {
+  background: color-mix(in oklab, var(--color-surface) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+@utility card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--color-brand), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand), color-mix(in oklab, var(--color-brand) 55%, var(--color-accent)));
+}
+
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-surface-2) 25%, var(--color-surface-3) 50%, var(--color-surface-2) 75%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Fon: nuqtali to'r + yumshoq brend nuri */
+.app-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 85% -10%, color-mix(in oklab, var(--color-brand) 16%, transparent), transparent 70%),
+    radial-gradient(50rem 36rem at -10% 110%, color-mix(in oklab, var(--color-accent) 10%, transparent), transparent 70%),
+    radial-gradient(var(--color-line) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
