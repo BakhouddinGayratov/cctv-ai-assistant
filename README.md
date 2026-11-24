@@ -16,9 +16,15 @@ Birinchi ishga tushishda yuz tanish modellari (`models/`, ~39 MB) avtomatik yukl
 
 ## O'rnatish (ofis kompyuterida)
 
-1. `cctv_ai_assistant` papkasini (`frontend\node_modules` siz) va `yolov8n.pt` ni ofis kompyuteriga ko'chiring, `yolov8n.pt` papkaning yonida tursin.
-2. `ornatish.bat` → o'ng tugma → "Administrator sifatida ishga tushirish". U Python, ffmpeg va kutubxonalarni o'rnatadi, portni tekshiradi, kompyuterga kirilganda serverni oynasiz yoqadigan qilib qo'yadi va uxlash rejimini o'chiradi.
-3. Tashqaridan kirish: shu kompyuterga va telefonga Tailscale o'rnating (bitta akkaunt), keyin `http://<tailscale-IP>:<PORT>`.
+1. **Git va GitHub CLI** o'rnating, GitHub'ga kiring (bir marta):
+   `winget install Git.Git GitHub.cli` → yangi terminal → `gh auth login`
+2. **Kodni oling:** `gh repo clone BakhouddinGayratov/cctv-ai-assistant "D:\Camera AI\cctv_ai_assistant"`
+3. **Maxfiy sozlamalar (.env):** eski kompyuterdagi `.env` faylini fleshka orqali shu papkaga ko'chiring. U GitHub'da yo'q (parollar va kalitlar). Ko'chirmasangiz, `ornatish.bat` bo'sh `.env` ochadi — to'ldirasiz.
+4. **Xodimlar ma'lumoti (ixtiyoriy):** eski xodimlar va yuzlar kerak bo'lsa, `data` papkasini ham ko'chiring. Ko'chirilmasa toza baza bilan boshlanadi.
+5. `ornatish.bat` → o'ng tugma → "Administrator sifatida ishga tushirish". Python, ffmpeg, kutubxonalar va modellarni o'zi o'rnatadi, kompyuterga kirilganda serverni oynasiz yoqadigan qilib qo'yadi, uxlash rejimini o'chiradi va kirish manzilini ko'rsatadi.
+6. **Tashqaridan kirish:** shu kompyuterga va telefonga Tailscale o'rnating (bitta akkaunt), keyin `http://<tailscale-IP>:<PORT>`.
+
+**Yangilash:** `yangilash.bat` ni ishga tushiring — GitHub'dan yangi versiyani oladi va serverni qayta yoqadi.
 
 Server to'xtasa `ishga_tushirish.bat` uni 10 soniyada qayta yoqadi, tarixi `server_restart.log` da.
 ## Kirish
